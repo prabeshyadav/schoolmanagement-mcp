@@ -1,0 +1,21 @@
+services:
+  mcp-server:
+    build: .
+    container_name: school_mcp
+    env_file:
+      - .env
+    environment:
+      - DATABASE_URL=postgresql://postgres:postgres@schoolms_db:5432/school_db
+      - DJANGO_API_URL=http://schoolms:8000/api
+      - MCP_SERVER_FILE=mcp_server.py
+    ports:
+      - "8001:8001"
+    networks:
+      - school_network
+    stdin_open: 
+      true
+    tty: 
+      true
+networks:
+  school_network:
+    external: true
